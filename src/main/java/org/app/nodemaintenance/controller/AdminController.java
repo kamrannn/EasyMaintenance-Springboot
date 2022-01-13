@@ -39,5 +39,10 @@ public class AdminController {
         return adminservice.getById(Id);
     }
 
+    @GetMapping("/getadminnode")
+    public ResponseEntity<Object> getAdminNode(){
+        return adminservice.adminNode();
+    }
+
 
 }

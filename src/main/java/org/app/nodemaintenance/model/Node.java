@@ -20,7 +20,7 @@ public class Node {
     private Long nodeId;
     private int ipAddress;
 
-    @OneToMany(cascade = CascadeType.MERGE)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "node_id", referencedColumnName = "nodeId")
     List<Network> network = new ArrayList<>();
     @OneToOne

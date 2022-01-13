@@ -35,6 +35,7 @@ public class AdminService {
             adminRepo.save(admin);
             return ResponseEntity.accepted().body(admin);
         } catch (Exception e) {
+            System.out.println(e);
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
@@ -46,12 +47,13 @@ public class AdminService {
      */
     public ResponseEntity<Object> showAllAdmin() {
         try {
-            List<Admin> adminList = adminRepo.findAll();
+            List<Admin> adminList = adminRepo.allAdmin();
             if (!adminList.isEmpty())
                 return ResponseEntity.ok().body(adminList);
             else
                 return ResponseEntity.ok().body("There are no admins");
         } catch (Exception e) {
+            System.out.println(e);
             return ResponseEntity.badRequest().body(e);
         }
     }
@@ -67,6 +69,7 @@ public class AdminService {
             Optional<Admin> admin = adminRepo.findById(Id);
             return ResponseEntity.ok().body(admin);
         } catch (Exception e) {
+            System.out.println(e);
             return ResponseEntity.ok().body(e.getMessage());
         }
     }
@@ -83,7 +86,26 @@ public class AdminService {
             adminRepo.delete(admin.get());
             return ResponseEntity.ok().body("Deleted");
         } catch (Exception e) {
+            System.out.println(e);
             return ResponseEntity.ok().body(e.getMessage());
+        }
+    }
+
+    /**
+     * Admin node response entity.
+     *
+     * @return the response entity
+     */
+    public ResponseEntity<Object> adminNode(){
+        try{
+            List<Object> objectList = adminRepo.listOfPairs();
+            if (!objectList.isEmpty()){
+                return ResponseEntity.ok().body(objectList);
+            }else return ResponseEntity.ok().body("There is no relation");
+        }
+        catch (Exception e){
+            System.out.println(e);
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 }
