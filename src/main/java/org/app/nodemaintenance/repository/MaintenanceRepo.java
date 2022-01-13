@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface MaintenanceRepo extends JpaRepository<Maintenance, Long> {
-    @Query(value = "SELECT admin_id, node_id FROM maintenance", nativeQuery = true)
-    List<Object> listOfPairs();
+
+    List<Maintenance> findMaintenancesByAdmin_AdminId(Long adminId);
 }

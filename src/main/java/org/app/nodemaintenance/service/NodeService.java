@@ -1,6 +1,8 @@
 package org.app.nodemaintenance.service;
 
 import org.app.nodemaintenance.model.Node;
+import org.app.nodemaintenance.repository.ComputerRepo;
+import org.app.nodemaintenance.repository.NetworkRepo;
 import org.app.nodemaintenance.repository.NodeRepo;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -15,10 +17,11 @@ import java.util.Optional;
 public class NodeService {
     private final NodeRepo nodeRepo;
 
+
     /**
      * Instantiates a new Node service.
      *
-     * @param nodeRepo the node repo
+     * @param nodeRepo     the node repo
      */
     public NodeService(NodeRepo nodeRepo) {
         this.nodeRepo = nodeRepo;
@@ -80,7 +83,8 @@ public class NodeService {
     public ResponseEntity<Object> deleteNode(Long Id) {
         try {
             Optional<Node> node = nodeRepo.findById(Id);
-            nodeRepo.delete(node.get());
+            if (node.isPresent())
+                nodeRepo.delete(node.get());
             return ResponseEntity.ok().body("Deleted");
         } catch (Exception e) {
             return ResponseEntity.ok().body(e.getMessage());

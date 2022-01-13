@@ -1,7 +1,9 @@
 package org.app.nodemaintenance.service;
 
 import org.app.nodemaintenance.model.Network;
+import org.app.nodemaintenance.model.Node;
 import org.app.nodemaintenance.repository.NetworkRepo;
+import org.app.nodemaintenance.repository.NodeRepo;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -14,14 +16,17 @@ import java.util.Optional;
 @Service
 public class NetworkService {
     private final NetworkRepo networkRepo;
+    private final NodeRepo nodeRepo;
 
     /**
      * Instantiates a new Network service.
      *
      * @param networkRepo the network repo
+     * @param nodeRepo
      */
-    public NetworkService(NetworkRepo networkRepo) {
+    public NetworkService(NetworkRepo networkRepo, NodeRepo nodeRepo) {
         this.networkRepo = networkRepo;
+        this.nodeRepo = nodeRepo;
     }
 
     /**
@@ -80,6 +85,10 @@ public class NetworkService {
     public ResponseEntity<Object> deleteNetwork(Long Id) {
         try {
             Optional<Network> network = networkRepo.findById(Id);
+            if (network.isPresent()) {
+                Node node = nodeRepo.getById(Id);
+                node.setNetwork(null);
+            }
             networkRepo.delete(network.get());
             return ResponseEntity.ok().body("Deleted");
         } catch (Exception e) {

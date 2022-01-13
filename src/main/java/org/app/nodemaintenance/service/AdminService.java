@@ -1,7 +1,9 @@
 package org.app.nodemaintenance.service;
 
 import org.app.nodemaintenance.model.Admin;
+import org.app.nodemaintenance.model.Maintenance;
 import org.app.nodemaintenance.repository.AdminRepo;
+import org.app.nodemaintenance.repository.MaintenanceRepo;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -14,14 +16,17 @@ import java.util.Optional;
 @Service
 public class AdminService {
     private final AdminRepo adminRepo;
+    private final MaintenanceRepo maintenanceRepo;
 
     /**
      * Instantiates a new Admin service.
      *
-     * @param adminRepo the admin repo
+     * @param adminRepo       the admin repo
+     * @param maintenanceRepo
      */
-    public AdminService(AdminRepo adminRepo) {
+    public AdminService(AdminRepo adminRepo, MaintenanceRepo maintenanceRepo) {
         this.adminRepo = adminRepo;
+        this.maintenanceRepo = maintenanceRepo;
     }
 
     /**
@@ -83,8 +88,20 @@ public class AdminService {
     public ResponseEntity<Object> deleteAdmin(Long Id) {
         try {
             Optional<Admin> admin = adminRepo.findById(Id);
-            adminRepo.delete(admin.get());
-            return ResponseEntity.ok().body("Deleted");
+            if(admin.isPresent()){
+                List<Maintenance> maintenanceList = maintenanceRepo.findMaintenancesByAdmin_AdminId(Id);
+                if (!maintenanceList.isEmpty()) {
+                    for (Maintenance maintenance : maintenanceList) {
+                        maintenance.setAdmin(null);
+                        maintenanceRepo.save(maintenance);
+                    }
+                }
+                adminRepo.delete(admin.get());
+                return ResponseEntity.ok().body("Deleted");
+
+            }else {
+                return ResponseEntity.ok().body("There is no admin against this ID");
+            }
         } catch (Exception e) {
             System.out.println(e);
             return ResponseEntity.ok().body(e.getMessage());
@@ -96,14 +113,13 @@ public class AdminService {
      *
      * @return the response entity
      */
-    public ResponseEntity<Object> adminNode(){
-        try{
+    public ResponseEntity<Object> adminNode() {
+        try {
             List<Object> objectList = adminRepo.listOfPairs();
-            if (!objectList.isEmpty()){
+            if (!objectList.isEmpty()) {
                 return ResponseEntity.ok().body(objectList);
-            }else return ResponseEntity.ok().body("There is no relation");
-        }
-        catch (Exception e){
+            } else return ResponseEntity.ok().body("There is no relation");
+        } catch (Exception e) {
             System.out.println(e);
             return ResponseEntity.badRequest().body(e.getMessage());
         }

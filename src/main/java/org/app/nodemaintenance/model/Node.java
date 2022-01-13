@@ -23,6 +23,7 @@ public class Node {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "node_id", referencedColumnName = "nodeId")
     List<Network> network = new ArrayList<>();
-    @OneToOne
+
+    @OneToOne(cascade = CascadeType.ALL)
     private Computer computer;
 }
