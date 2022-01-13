@@ -20,6 +20,6 @@ public class Computer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long computerId;
-    private int model;
-    private int macAddress;
+    private String model;
+    private String macAddress;
 }

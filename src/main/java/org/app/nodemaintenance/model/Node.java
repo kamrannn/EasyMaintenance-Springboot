@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -18,11 +17,11 @@ public class Node {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long nodeId;
-    private int ipAddress;
+    private String ipAddress;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "node_id", referencedColumnName = "nodeId")
-    List<Network> network = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "node_id")
+    List<Network> network;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Computer computer;
