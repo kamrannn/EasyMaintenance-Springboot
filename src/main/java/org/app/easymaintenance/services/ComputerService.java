@@ -1,7 +1,7 @@
-package org.app.nodemaintenance.service;
+package org.app.easymaintenance.services;
 
-import org.app.nodemaintenance.model.Computer;
-import org.app.nodemaintenance.repository.ComputerRepo;
+import org.app.easymaintenance.entities.Computer;
+import org.app.easymaintenance.repositories.ComputerRepo;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 

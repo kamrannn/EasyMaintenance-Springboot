@@ -1,8 +1,7 @@
-package org.app.nodemaintenance.repository;
+package org.app.easymaintenance.repositories;
 
-import org.app.nodemaintenance.model.Maintenance;
+import org.app.easymaintenance.entities.Maintenance;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

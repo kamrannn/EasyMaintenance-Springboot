@@ -1,6 +1,6 @@
-package org.app.nodemaintenance.repository;
+package org.app.easymaintenance.repositories;
 
-import org.app.nodemaintenance.model.Computer;
+import org.app.easymaintenance.entities.Computer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

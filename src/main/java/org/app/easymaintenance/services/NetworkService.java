@@ -1,8 +1,8 @@
-package org.app.nodemaintenance.service;
+package org.app.easymaintenance.services;
 
-import org.app.nodemaintenance.model.Network;
-import org.app.nodemaintenance.repository.NetworkRepo;
-import org.app.nodemaintenance.repository.NodeRepo;
+import org.app.easymaintenance.entities.Network;
+import org.app.easymaintenance.repositories.NetworkRepo;
+import org.app.easymaintenance.repositories.NodeRepo;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package org.app.nodemaintenance.model;
+package org.app.easymaintenance.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,11 +16,12 @@ import java.util.List;
 public class Node {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "pk_node")
     private Long nodeId;
     private String ipAddress;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "node_id")
+    @JoinColumn(name = "fk_node")
     List<Network> network;
 
     @OneToOne(cascade = CascadeType.ALL)

@@ -1,4 +1,4 @@
-package org.app.nodemaintenance.model;
+package org.app.easymaintenance.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,10 +22,10 @@ public class Maintenance {
     private String description;
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "admin_id", referencedColumnName = "adminId")
+    @JoinColumn(name = "fk_admin", referencedColumnName = "pk_admin")
     private Admin admin;
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "node_id", referencedColumnName = "nodeId")
+    @JoinColumn(name = "fk_node", referencedColumnName = "pk_node")
     private Node node;
 }

@@ -1,7 +1,7 @@
-package org.app.nodemaintenance.controller;
+package org.app.easymaintenance.restcontroller;
 
-import org.app.nodemaintenance.model.Maintenance;
-import org.app.nodemaintenance.service.MaintenanceService;
+import org.app.easymaintenance.entities.Maintenance;
+import org.app.easymaintenance.services.MaintenanceService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

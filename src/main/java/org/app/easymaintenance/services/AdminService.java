@@ -1,9 +1,9 @@
-package org.app.nodemaintenance.service;
+package org.app.easymaintenance.services;
 
-import org.app.nodemaintenance.model.Admin;
-import org.app.nodemaintenance.model.Maintenance;
-import org.app.nodemaintenance.repository.AdminRepo;
-import org.app.nodemaintenance.repository.MaintenanceRepo;
+import org.app.easymaintenance.entities.Admin;
+import org.app.easymaintenance.entities.Maintenance;
+import org.app.easymaintenance.repositories.AdminRepo;
+import org.app.easymaintenance.repositories.MaintenanceRepo;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 

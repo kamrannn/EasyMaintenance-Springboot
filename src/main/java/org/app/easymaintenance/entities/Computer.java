@@ -1,4 +1,4 @@
-package org.app.nodemaintenance.model;
+package org.app.easymaintenance.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
